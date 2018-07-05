@@ -1,0 +1,17 @@
+rssing.com --- rss search engine
+http://www.chandrikadaily.com --- contact@chandrikadaily.com
+http://www.deepika.com --- editor@deepika.com
+http://www.deshabhimani.com --- gm@deshabhimani.com ---- http://www.deshabhimani.com/rss/ 
+http://www.generaldaily.com --- Editor@GeneralDaily.com  ---- english
+http://janayugomonline.com  --- http://janayugomonline.com/feed/ ---
+https://www.janmabhumidaily.com --- desk@janmabhumidaily.com
+http://news.keralakaumudi.com ----  
+https://www.madhyamam.com ---- 
+https://www.manoramaonline.com/home.html --- https://www.manoramaonline.com/news/just-in.feed
+http://www.mangalam.com --- http://www.mangalam.com/news/rss.xml
+http://www.thejasnews.com --- http://www.thejasnews.com/feed/
+http://www.metrovaartha.com --- http://www.metrovaartha.com/feed.xml
+http://suprabhaatham.com --- http://suprabhaatham.com/feed/
+http://www.mathrubhumi.com --- http://feeds.feedburner.com/mathrubhumi?format=xml
+
+mongo "mongodb+srv://cluster0-utshc.mongodb.net/test" --username albinzr
