@@ -26,9 +26,15 @@ const feedModel = new Schema({
 		required: [true, "Summary must not be empty."],
 		minlength: [3, "Summary must be 3 characters or more."],
 	},
+	content: {
+		type: String
+	},
 	url: {
 		type: String,
 		required: [true, "Url must not be empty."],
+	},
+	image: {
+		type: String
 	},
 	category:{
 		type:[String]

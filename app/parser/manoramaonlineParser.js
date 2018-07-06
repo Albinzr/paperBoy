@@ -3,10 +3,11 @@ const StandardFeedModel = require('../model/standardFeedModel')
 
 
 const manoramaonlineParser = (feeds, publisherId) => {
+console.log("in mm");
 
     var feedModel = [] 
 
-    feeds.forEach(feed => {
+    feeds.feed.entry.forEach(feed => {
         var categories = []
         var category = feed.category
         if (category !== (null || undefined)) {
@@ -20,7 +21,7 @@ const manoramaonlineParser = (feeds, publisherId) => {
         }
     
         const model = new StandardFeedModel({
-            key: feed.published + publisherId,
+            key: feed.pubDate + publisherId + feed.id,
             title: feed.title._,
             summary: feed.summary._,
             published: feed.published,

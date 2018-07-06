@@ -10,8 +10,12 @@ https://www.madhyamam.com ----
 https://www.manoramaonline.com/home.html --- https://www.manoramaonline.com/news/just-in.feed
 http://www.mangalam.com --- http://www.mangalam.com/news/rss.xml
 http://www.thejasnews.com --- http://www.thejasnews.com/feed/
-http://www.metrovaartha.com --- http://www.metrovaartha.com/feed.xml
-http://suprabhaatham.com --- http://suprabhaatham.com/feed/
-http://www.mathrubhumi.com --- http://feeds.feedburner.com/mathrubhumi?format=xml
+
+http://suprabhaatham.com --- http://suprabhaatham.com/feed/ -- not working
+
+http://www.mathrubhumi.com --- http://feeds.feedburner.com/mathrubhumi?format=xml --- done
+http://www.metrovaartha.com --- http://www.metrovaartha.com/feed.xml --- done
+
+possiblity of values going undefined or null cause -> function not to return
 
 mongo "mongodb+srv://cluster0-utshc.mongodb.net/test" --username albinzr

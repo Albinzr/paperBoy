@@ -1,9 +1,15 @@
 // const Feed = require('../model/feedModel')
 const https = require("https");
+const http = require("http");
 const parseString = require('xml2js').parseString;
+var convert = require('xml-js');
 const Publisher = require('../model/publisherModel')
 const StandardFeedModel = require("../model/standardFeedModel")
-const manoramaonlineParserParser = require('../parser/manoramaonlineParser')
+const manoramaonlineParser = require('../parser/manoramaonlineParser')
+const deshabhimaniParser = require('../parser/deshabhimaniParser')
+const metrovaarthaParser = require('../parser/metrovaarthaParser')
+const thejasnewsParser = require('../parser/thejasnewsParser')
+
 
 const feedUpdateController = {};
 
@@ -30,24 +36,24 @@ feedUpdateController.update = (req, res) => {
                 }).then(feed => {
                     return parseXML(feed)
                 }).then(feed => {
-                    return createStandardFeed(feed, publisherDetails.id)
+                    return createStandardFeed(feed, publisherDetails)
                 }).then(standardFeedArray => {
                     return saveStandardFeed(standardFeedArray)
                 }).then(() => {
-                    res.json({
-                        status: "success"
-                    })
+                    // res.json({
+                    //     status: "success"
+                    // })
                 }).catch(error => {
-                    console.log("error", error);
-                    res.json({
-                        status: "failled"
-                    })
+                    // console.log("error", error);
+                    // res.json({
+                    //     status: "failled"
+                    // })
                 })
                     .catch(error => {
-                        console.log("error", error);
-                        res.json({
-                            status: "failled"
-                        })
+                        // console.log("error", error);
+                        // res.json({
+                        //     status: "failled"
+                        // })
                     })
             })
 
@@ -62,6 +68,9 @@ feedUpdateController.delete = (req, res) => {
 
 }
 
+//get http
+const getHttp = url => (url.indexOf("https") === 0) ? https : http
+
 //get feed details
 const getPublisherDetails = () => {
     return Publisher.find((error, feed) => {
@@ -70,13 +79,13 @@ const getPublisherDetails = () => {
         } else {
             return
         }
-    }).select(['id', 'feed']);
+    }).select(['id', 'feed','publisher']);
 }
 
 //check for update
 const checkForUpdatedFeed = (id, feed) => {
     return new Promise(resolve => {
-        https.get(feed, resp => {
+        getHttp(feed).get(feed, resp => {
             let data = '';
 
             resp.on('data', (chunk) => {
@@ -98,9 +107,12 @@ const checkForUpdatedFeed = (id, feed) => {
 const parseXML = xml => {
     return new Promise(resolve => {
 
+        // var result1 =  convert.xml2json(xml, {compact: true, spaces: 2});
+        // console.log(result1);
+        
         parseString(xml, { trim: true, ignoreAttrs: false, explicitArray: false }, (error, result) => {
             if (error == null) {
-                resolve(result.feed.entry)
+                resolve(result)
             }
             reject(error)
         })
@@ -109,8 +121,14 @@ const parseXML = xml => {
 }
 
 //create standard feed
-const createStandardFeed = (data, publisherId) => {
-    return manoramaonlineParserParser(data, publisherId)
+const createStandardFeed = (data, publisherDetails) => {
+    console.log(publisherDetails);
+    
+    let functionName = publisherDetails.publisher + "Parser"    
+    console.log(functionName);
+    
+    return eval(functionName)(data, publisherDetails.id)
+
 }
 
 //save feed
